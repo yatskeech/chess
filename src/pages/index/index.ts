@@ -1,1 +1,1 @@
-export { IndexPage } from "./ui/index-page";
+export { IndexPage } from './ui/index-page';

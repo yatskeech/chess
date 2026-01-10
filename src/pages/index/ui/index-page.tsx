@@ -1,3 +1,5 @@
+import { GameBoard } from '@/widgets/game-board';
+
 export function IndexPage() {
-  return <div>Chess</div>;
+  return <GameBoard />;
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Player } from '@/entities/player';
 import { GameBoard } from '@/entities/board';
+import { Player } from '@/entities/player';
 
 export function IndexPage() {
   const [players] = useState<[Player, Player]>([

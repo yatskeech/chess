@@ -90,7 +90,7 @@ export class Board {
       const y = cell.y + dy;
 
       const targetCell = this.findCellAtCoordinates(x, y);
-      if (!targetCell) return;
+      if (!targetCell || !this.canMoveTo(targetCell)) return;
       targetCell.canMoveHere = !this.isSamePlayer(targetCell, cell);
     });
   }
@@ -126,7 +126,8 @@ export class Board {
 
           const targetCell = this.findCellAtCoordinates(x, y);
           if (!targetCell) continue;
-          targetCell.canMoveHere = !this.isSamePlayer(targetCell, cell);
+          targetCell.canMoveHere =
+            !this.isSamePlayer(targetCell, cell) && this.canMoveTo(targetCell);
           if (targetCell.figure) break;
         }
       }
@@ -142,6 +143,7 @@ export class Board {
 
       const targetCell = this.findCellAtCoordinates(x, y);
       if (!targetCell || this.isSamePlayer(targetCell, cell)) return;
+      if (!this.canMoveTo(targetCell)) return;
 
       switch (type) {
         case 'forward': {
@@ -161,6 +163,7 @@ export class Board {
 
       const targetCell = this.findCellAtCoordinates(x, y);
       if (!targetCell || this.isSamePlayer(targetCell, cell)) return;
+      if (!this.canMoveTo(targetCell)) return;
 
       switch (type) {
         case 'default': {
@@ -168,6 +171,10 @@ export class Board {
         }
       }
     });
+  }
+
+  private canMoveTo(cell: Cell) {
+    return cell.figure?.name !== 'king';
   }
 
   private isSamePlayer(cellA: Cell, cellB: Cell): boolean {

@@ -4,7 +4,7 @@ import { FIGURE_COLORS } from '../model/constants';
 
 const FIGURES: Record<
   FigureName,
-  ComponentType<BaseGameFigureProps & { colors: FigureColorValue }>
+  ComponentType<BaseGameFigureProps & { colors: FigureColors }>
 > = {
   bishop: ({ size, colors, className }) => (
     <svg
@@ -35,14 +35,14 @@ const FIGURES: Record<
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M30.0019 3.87506C30.0694 1.71562 31.8395 0 34 0H40C42.1605 0 43.9306 1.71562 43.998 3.87506L44.0332 5H46C48.2091 5 50 6.79086 50 9V11.4261C54.3602 10.4394 59.0663 11.0984 63.0607 14.4271C71.3589 21.3423 70.5954 35.8381 60.7472 43.7669C58.3706 45.6803 56.5035 47.2665 55.2178 48.901C54.9245 49.2739 54.6732 49.6347 54.4617 49.9878L58.5156 50.5361C60.4995 50.8044 61.9795 52.4981 61.9795 54.5V62C61.9795 64.2091 60.1886 66 57.9795 66H16.0205C13.8114 66 12.0205 64.2091 12.0205 62V54.5C12.0205 52.4981 13.5005 50.8044 15.4844 50.5361L19.5383 49.9878C19.3268 49.6347 19.0755 49.2739 18.7822 48.901C17.4965 47.2665 15.6294 45.6803 13.2528 43.7669C3.40462 35.8381 2.64109 21.3423 10.9393 14.4271C14.9337 11.0984 19.6398 10.4394 24 11.4261V9C24 6.79086 25.7909 5 28 5H29.9668L30.0019 3.87506Z"
         fill={colors.stroke}
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M34 4H40L40.1562 9H46V15H40.3437L40.6185 21.793C40.7282 21.6638 40.8411 21.5372 40.9574 21.4135C46.4206 15.6071 54.5207 12.5172 60.5 17.5C66.5 22.5 66.5 34 58.2387 40.6512C53.559 44.4188 49.3673 48.0509 49.5739 53.3632L57.9795 54.5V62H16.0205V54.5L24.4261 53.3632C24.6327 48.0509 20.441 44.4188 15.7613 40.6512C7.5 34 7.5 22.5 13.5 17.5C19.4793 12.5172 27.5794 15.6071 33.0426 21.4135C33.1589 21.5372 33.2718 21.6638 33.3815 21.793L33.6562 15H28V9H33.8437L34 4ZM28.348 26.9731C32.0147 32.9791 32.5 40 32.5 43.0532C30.6621 43.0565 23.7338 40.0085 20.0656 35.0046C17.4248 31.4022 16.7362 26.0575 19 23.9825C21.2638 21.9075 26.0563 23.2194 28.348 26.9731ZM45.652 26.9731C41.9853 32.9791 41.5 40 41.5 43.0532C43.3379 43.0565 50.2662 40.0085 53.9344 35.0046C56.5752 31.4022 57.2638 26.0575 55 23.9825C52.7362 21.9075 47.9436 23.2194 45.652 26.9731Z"
         fill={colors.fill}
       />
@@ -62,8 +62,8 @@ const FIGURES: Record<
         fill={colors.stroke}
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M39.1707 15.0185L30.1368 4.48187C28.8291 6.96447 27.5614 11.3461 29.3841 14.5091C28.4994 14.5879 27.6539 14.7375 27 15C22.8279 16.6743 18.25 21 16 30C15.3485 32.606 14.1759 33.854 12.7822 35.3372C11.4676 36.7364 9.95622 38.3448 8.5 41.5C5.5 48 13.5963 54.5 19.5 48.5963C22.8191 45.2772 25.7204 43.9069 28.1562 42.7566C31.662 41.1008 34.2037 39.9004 35.6393 34C36.3224 36.7523 36.0492 43.2477 29.4918 47.211C22.9344 51.1743 21.5683 59.5229 21.7049 61.9999H59C59 38.4832 55.8865 18.1648 39.1707 15.0185Z"
         fill={colors.fill}
       />
@@ -133,10 +133,10 @@ const FIGURES: Record<
 type BaseGameFigureProps = { size?: number; className?: string };
 
 export function GameFigure(
-  props: BaseGameFigureProps & { name: FigureName; player: PlayerColors },
+  props: BaseGameFigureProps & { name: FigureName; playerColor: PlayerColors },
 ) {
-  const { name, player, ...rest } = props;
+  const { name, playerColor, ...rest } = props;
   const FigureComponent = FIGURES[name];
-  const colors = FIGURE_COLORS[player];
+  const colors = FIGURE_COLORS[playerColor];
   return <FigureComponent colors={colors} {...rest} />;
 }

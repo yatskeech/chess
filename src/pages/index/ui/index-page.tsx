@@ -1,10 +1,18 @@
-import { GameBoard } from '@/widgets/game-board';
+import { useState } from 'react';
+
+import { Player } from '@/entities/player';
+import { GameBoard } from '@/entities/board';
 
 export function IndexPage() {
+  const [players] = useState<[Player, Player]>([
+    new Player('white'),
+    new Player('black'),
+  ]);
+
   return (
     <div className="flex h-full flex-col items-center">
       <div>Player 1</div>
-      <GameBoard className="flex-1" />
+      <GameBoard players={players} className="flex-1" />
       <div>Player 2</div>
     </div>
   );

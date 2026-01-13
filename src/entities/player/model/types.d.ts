@@ -1,0 +1,1 @@
+type PlayerColors = 'white' | 'black';
